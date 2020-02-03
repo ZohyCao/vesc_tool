@@ -40,6 +40,8 @@ private slots:
 
     void on_uiAutoScaleBox_toggled(bool checked);
 
+    void on_lang_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::PageSettings *ui;
     QSettings mSettings;

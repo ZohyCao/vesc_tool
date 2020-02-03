@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
     QSettings set;
     bool scaleAuto = true;
     double scale = 1.0;
+    int language_index = 1;
 
     if (set.contains("app_scale_auto")) {
         scaleAuto = set.value("app_scale_auto").toBool();
@@ -55,6 +56,19 @@ int main(int argc, char *argv[])
         set.setValue("app_scale_auto", scaleAuto);
     }
 
+    if (set.contains("language_index")){
+        language_index = set.value("language_index").toInt();
+    }else {
+        set.setValue("language_index",language_index);
+    }
+
+    //Translation
+    static QTranslator qtTranslator;
+    if(language_index == 1)
+        qtTranslator.load("lang_Chinese.qm","://");
+    else qtTranslator.load("lang_English.qm","://");
+
+    //UI scale
     if (scaleAuto) {
         QApplication tmp(argc, argv);
         QRect rec = tmp.desktop()->screenGeometry();
@@ -90,6 +104,7 @@ int main(int argc, char *argv[])
 #endif
 
     QApplication a(argc, argv);
+    a.installTranslator(&qtTranslator);
 
     // Fonts
     QFontDatabase::addApplicationFont("://res/fonts/DejaVuSans.ttf");

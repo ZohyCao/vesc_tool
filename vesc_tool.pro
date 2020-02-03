@@ -1,4 +1,4 @@
-#-------------------------------------------------
+ #-------------------------------------------------
 #
 # Project created by QtCreator 2016-08-12T21:55:19
 #
@@ -21,6 +21,10 @@ DEFINES += VT_VERSION=$$VT_VERSION
 DEFINES += VT_INTRO_VERSION=$$VT_INTRO_VERSION
 
 CONFIG += c++11
+
+#TRANLATION
+TRANSLATIONS += lang_English.ts \
+                lang_Chinese.ts
 
 # Build mobile GUI
 #CONFIG += build_mobile
@@ -49,7 +53,7 @@ DEFINES += HAS_POS
 # Options
 #CONFIG += build_original
 #CONFIG += build_platinum
-#CONFIG += build_gold
+CONFIG += build_gold
 #CONFIG += build_silver
 #CONFIG += build_bronze
 #CONFIG += build_free

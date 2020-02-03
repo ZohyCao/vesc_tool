@@ -29,9 +29,9 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="uiScaleLabel">
           <property name="text">
-           <string>UI Scale Factor (restart required)</string>
+           <string>UI Scale Factor   (restart required)</string>
           </property>
          </widget>
         </item>
@@ -70,6 +70,37 @@
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="lang_label">
+          <property name="text">
+           <string>Language Setting  (restart required)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="lang_comboBox">
+          <property name="tabletTracking">
+           <bool>true</bool>
+          </property>
+          <property name="currentText">
+           <string>English</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>English</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>简体中文</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -77,7 +108,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>144</height>
+          <height>40</height>
          </size>
         </property>
        </spacer>

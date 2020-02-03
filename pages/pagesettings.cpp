@@ -34,7 +34,9 @@ PageSettings::PageSettings(QWidget *parent) :
     if (mSettings.contains("app_scale_auto")) {
         ui->uiAutoScaleBox->setChecked(mSettings.value("app_scale_auto").toBool());
     }
-
+    if (mSettings.contains("language_index")) {
+        ui->lang_comboBox->setCurrentIndex(mSettings.value("language_index").toInt());
+    }
     ui->uiScaleBox->setEnabled(!ui->uiAutoScaleBox->isChecked());
 }
 
@@ -52,4 +54,9 @@ void PageSettings::on_uiAutoScaleBox_toggled(bool checked)
 {
     mSettings.setValue("app_scale_auto", checked);
     ui->uiScaleBox->setEnabled(!checked);
+}
+
+void PageSettings::on_lang_comboBox_currentIndexChanged(int index)
+{
+    mSettings.setValue("language_index",index);
 }
