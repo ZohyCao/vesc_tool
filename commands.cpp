@@ -235,7 +235,19 @@ void Commands::processPacket(QByteArray data)
 
         emit valuesReceived(values, mask);
     } break;
+    case COMM_GET_TEST_VALUES:{
+        mTimeoutValues = 0;
+        MC_VALUES values;
 
+        uint32_t mask = 0xFFFFFFFF;
+        if (mask & (uint32_t(1) << 0)) {
+            values.current_in = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 1)) {
+            values.current_motor = vb.vbPopFrontDouble32(1e2);
+        }
+        emit valuesReceived(values, mask);
+    }break;
     case COMM_PRINT:
         emit printReceived(QString::fromLatin1(vb));
         break;
@@ -621,6 +633,19 @@ void Commands::getValues()
 
     VByteArray vb;
     vb.vbAppendInt8(COMM_GET_VALUES);
+    emitData(vb);
+}
+
+void Commands::getTestValues()
+{
+    if (mTimeoutValues > 0) {
+        return;
+    }
+
+    mTimeoutValues = mTimeoutCount;
+
+    VByteArray vb;
+    vb.vbAppendInt8(COMM_GET_TEST_VALUES);
     emitData(vb);
 }
 

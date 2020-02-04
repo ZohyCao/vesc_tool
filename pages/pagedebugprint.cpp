@@ -46,3 +46,8 @@ void PageDebugPrint::printConsole(QString str)
                                    + str);
     ui->consoleBrowser->moveCursor(QTextCursor::End);
 }
+
+void PageDebugPrint::on_clearButton_clicked()
+{
+    ui->consoleBrowser->clear();
+}

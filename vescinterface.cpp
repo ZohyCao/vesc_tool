@@ -983,9 +983,9 @@ bool VescInterface::openRtLogFile(QString outDirectory)
     }
 
     QDateTime d = QDateTime::currentDateTime();
-    mRtLogFile.setFileName(QString("%1/%2-%3-%4_%5:%6:%7.csv").
+    mRtLogFile.setFileName(QString("%1/%2-%3-%4_%5-%6-%7.csv").
                            arg(outDirectory).
-                           arg(d.date().year(), 2, 10, QChar('0')).
+                           arg(d.date().year(), 4, 10, QChar('0')).
                            arg(d.date().month(), 2, 10, QChar('0')).
                            arg(d.date().day(), 2, 10, QChar('0')).
                            arg(d.time().hour(), 2, 10, QChar('0')).
@@ -2367,6 +2367,7 @@ void VescInterface::fwVersionReceived(int major, int minor, QString hw, QByteArr
 
     QVector<int> compCommands;
     if (fw_connected >= qMakePair(3, 47)) {
+        compCommands.append(int(COMM_GET_TEST_VALUES));
         compCommands.append(int(COMM_GET_VALUES));
         compCommands.append(int(COMM_SET_DUTY));
         compCommands.append(int(COMM_SET_CURRENT));

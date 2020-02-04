@@ -39,6 +39,9 @@ public:
 public slots:
     void printConsole(QString str);
 
+private slots:
+    void on_clearButton_clicked();
+
 private:
     Ui::PageDebugPrint *ui;
 };

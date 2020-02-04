@@ -106,7 +106,7 @@ void Packet::sendPacket(const QByteArray &data)
     to_send.append((char)(crc >> 8));
     to_send.append((char)(crc & 0xFF));
     to_send.append((char)3);
-
+    //qDebug()<<"dataToSend:"<<to_send;
     emit dataToSend(to_send);
 }
 
@@ -121,6 +121,7 @@ unsigned short Packet::crc16(const unsigned char *buf, unsigned int len)
 
 void Packet::processData(QByteArray data)
 {
+    //qDebug()<<"processData:"<<data;
     QVector<QByteArray> decodedPackets;
 
     for(unsigned char rx_data: data) {

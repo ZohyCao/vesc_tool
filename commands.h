@@ -106,6 +106,7 @@ public slots:
 
     void getFwVersion();
     void getValues();
+    void getTestValues();
     void sendTerminalCmd(QString cmd);
     void sendTerminalCmdSync(QString cmd);
     void setDutyCycle(double dutyCycle);
