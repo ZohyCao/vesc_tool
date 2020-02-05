@@ -67,6 +67,9 @@ signals:
     void fwVersionReceived(int major, int minor, QString hw, QByteArray uuid, bool isPaired);
     void ackReceived(QString ackType);
     void valuesReceived(MC_VALUES values, unsigned int mask);
+
+    void monitorReceived(MONITOR_VALUES values,unsigned int mask);
+    void printCmdFeedback(QString str);
     void printReceived(QString str);
     void samplesReceived(QByteArray bytes);
     void rotorPosReceived(double pos);
@@ -106,8 +109,8 @@ public slots:
 
     void getFwVersion();
     void getValues();
-    void getTestValues();
     void sendTerminalCmd(QString cmd);
+    void sendSerialCmd(QString cmd);
     void sendTerminalCmdSync(QString cmd);
     void setDutyCycle(double dutyCycle);
     void setCurrent(double current);

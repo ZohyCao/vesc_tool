@@ -235,19 +235,6 @@ void Commands::processPacket(QByteArray data)
 
         emit valuesReceived(values, mask);
     } break;
-    case COMM_GET_TEST_VALUES:{
-        mTimeoutValues = 0;
-        MC_VALUES values;
-
-        uint32_t mask = 0xFFFFFFFF;
-        if (mask & (uint32_t(1) << 0)) {
-            values.current_in = vb.vbPopFrontDouble32(1e2);
-        }
-        if (mask & (uint32_t(1) << 1)) {
-            values.current_motor = vb.vbPopFrontDouble32(1e2);
-        }
-        emit valuesReceived(values, mask);
-    }break;
     case COMM_PRINT:
         emit printReceived(QString::fromLatin1(vb));
         break;
@@ -604,7 +591,22 @@ void Commands::processPacket(QByteArray data)
         int res = vb.vbPopFrontInt16();
         emit bmReadMemRes(res, vb);
     } break;
+    case COMM_GET_MONITOR_VALUES:{
+        mTimeoutValues = 0;
+        MONITOR_VALUES values;
 
+        uint32_t mask = 0xFFFFFFFF;
+        if (mask & (uint32_t(1) << 0)) {
+            values.ch0 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 1)) {
+            values.ch1 = vb.vbPopFrontDouble32(1e2);
+        }
+        emit monitorReceived(values, mask);
+    }break;
+    case COMM_CMD_FEEDBACK:
+        emit printCmdFeedback(QString::fromLatin1(vb));
+        break;
     default:
         break;
     }
@@ -636,24 +638,19 @@ void Commands::getValues()
     emitData(vb);
 }
 
-void Commands::getTestValues()
-{
-    if (mTimeoutValues > 0) {
-        return;
-    }
-
-    mTimeoutValues = mTimeoutCount;
-
-    VByteArray vb;
-    vb.vbAppendInt8(COMM_GET_TEST_VALUES);
-    emitData(vb);
-}
-
 void Commands::sendTerminalCmd(QString cmd)
 {
     VByteArray vb;
     vb.vbAppendInt8(COMM_TERMINAL_CMD);
     vb.append(cmd.toLatin1());
+    emitData(vb);
+}
+
+void Commands::sendSerialCmd(QString cmd){
+    VByteArray vb;
+    vb.vbAppendInt8(COMM_CMD_SEND);
+    vb.append(cmd.toLatin1());
+    vb.append(QString("\r\n"));
     emitData(vb);
 }
 

@@ -335,8 +335,59 @@ public:
     double q2;
     double q3;
 };
-
 Q_DECLARE_METATYPE(IMU_VALUES)
+
+
+struct MONITOR_VALUES {
+    Q_GADGET
+
+    Q_PROPERTY(double ch0 MEMBER ch0)
+
+    Q_PROPERTY(double ch1 MEMBER ch1)
+    Q_PROPERTY(double ch2 MEMBER ch2)
+    Q_PROPERTY(double ch3 MEMBER ch3)
+
+    Q_PROPERTY(double ch4 MEMBER ch4)
+    Q_PROPERTY(double ch5 MEMBER ch5)
+    Q_PROPERTY(double ch6 MEMBER ch6)
+
+    Q_PROPERTY(double ch7 MEMBER ch7)
+    Q_PROPERTY(double ch8 MEMBER ch8)
+    Q_PROPERTY(double ch9 MEMBER ch9)
+
+public:
+    MONITOR_VALUES() {
+        ch0 = 0; ch1 = 0; ch2 = 0;
+        ch3 = 0; ch4 = 0; ch5 = 0;
+        ch6 = 0; ch7 = 0; ch8 = 0;
+        ch9 = 0;
+    }
+
+    bool operator==(const MONITOR_VALUES &other) const {
+        (void)other;
+        // compare members
+        return true;
+    }
+
+    bool operator!=(MONITOR_VALUES const &other) const {
+        return !(*this == other);
+    }
+
+    double ch0;
+    double ch1;
+    double ch2;
+
+    double ch3;
+    double ch4;
+    double ch5;
+
+    double ch6;
+    double ch7;
+    double ch8;
+
+    double ch9;
+};
+Q_DECLARE_METATYPE(MONITOR_VALUES)
 
 struct LOG_DATA {
     Q_GADGET
@@ -506,7 +557,11 @@ typedef enum {
     COMM_PLOT_SET_GRAPH,
     COMM_GET_DECODED_BALANCE,
     COMM_BM_MEM_READ,
-    COMM_GET_TEST_VALUES=100
+
+    COMM_NORMAL_SERIAL_START = 100,
+    COMM_CMD_SEND,
+    COMM_CMD_FEEDBACK,
+    COMM_GET_MONITOR_VALUES,
 } COMM_PACKET_ID;
 
 typedef enum {

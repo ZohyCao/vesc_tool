@@ -2367,7 +2367,9 @@ void VescInterface::fwVersionReceived(int major, int minor, QString hw, QByteArr
 
     QVector<int> compCommands;
     if (fw_connected >= qMakePair(3, 47)) {
-        compCommands.append(int(COMM_GET_TEST_VALUES));
+        compCommands.append(int(COMM_CMD_SEND));
+        compCommands.append(int(COMM_CMD_FEEDBACK));
+        compCommands.append(int(COMM_GET_MONITOR_VALUES));
         compCommands.append(int(COMM_GET_VALUES));
         compCommands.append(int(COMM_SET_DUTY));
         compCommands.append(int(COMM_SET_CURRENT));

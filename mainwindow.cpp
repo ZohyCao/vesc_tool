@@ -989,6 +989,11 @@ void MainWindow::reloadPages()
     ui->pageWidget->addWidget(mPageLogAnalysis);
     addPageItem(tr("Log Analysis"), "://res/icons/Waypoint Map-96.png", "", false, true);
 
+    mPageSerialAnalysis = new PageSerialAnalysis(this);
+    mPageSerialAnalysis->setVesc(mVesc);
+    ui->pageWidget->addWidget(mPageSerialAnalysis);
+    addPageItem(tr("Serial Analysis"), "://res/icons/Waypoint Map-96.png", "", false, true);
+
     mPageTerminal = new PageTerminal(this);
     mPageTerminal->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageTerminal);
