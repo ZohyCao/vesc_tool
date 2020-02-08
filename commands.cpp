@@ -602,6 +602,31 @@ void Commands::processPacket(QByteArray data)
         if (mask & (uint32_t(1) << 1)) {
             values.ch1 = vb.vbPopFrontDouble32(1e2);
         }
+        if (mask & (uint32_t(1) << 2)) {
+            values.ch2 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 3)) {
+            values.ch3 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 4)) {
+            values.ch4 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 5)) {
+            values.ch5 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 6)) {
+            values.ch6 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 7)) {
+            values.ch7 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 8)) {
+            values.ch8 = vb.vbPopFrontDouble32(1e2);
+        }
+        if (mask & (uint32_t(1) << 9)) {
+            values.ch9 = vb.vbPopFrontDouble32(1e2);
+        }
+        //qDebug()<<"receive monitor";
         emit monitorReceived(values, mask);
     }break;
     case COMM_CMD_FEEDBACK:

@@ -2449,6 +2449,14 @@ void VescInterface::fwVersionReceived(int major, int minor, QString hw, QByteArr
         }
     } else if (!fwPairs.contains(fw_connected)) {
         if (fw_connected >= qMakePair(1, 1)) {
+            if(fw_connected == qMakePair(3, 61)){
+                mCommands->setLimitedMode(true);
+                updateFwRx(true);
+                if (!wasReceived) {
+                emit messageDialog(tr("Warning"), tr("The connected device is not VESC.It's limited"
+                                                    " mode for typical serial connection,"
+                                                    " Serial Analysis is available!"), false, false);
+            }else{
             mCommands->setLimitedMode(true);
             updateFwRx(true);
             if (!wasReceived) {
@@ -2457,6 +2465,7 @@ void VescInterface::fwVersionReceived(int major, int minor, QString hw, QByteArr
                                                     " updated from the Firmware page."
                                                     " Until then, limited communication mode will be used."), false, false);
             }
+            }}
         } else {
             updateFwRx(false);
             mFwRetries = 0;
